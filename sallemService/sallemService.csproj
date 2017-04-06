@@ -159,6 +159,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FriendshipController.cs" />
     <Compile Include="Controllers\FriendsPostsController.cs" />
+    <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\PostImageController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
