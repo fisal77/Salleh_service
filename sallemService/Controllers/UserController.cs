@@ -6,6 +6,8 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using sallemService.DataObjects;
 using sallemService.Models;
+using Microsoft.Azure.Mobile.Server.Config;
+using Microsoft.Azure.NotificationHubs;
 
 namespace sallemService.Controllers
 {
@@ -40,9 +42,16 @@ namespace sallemService.Controllers
         // POST tables/User
         public async Task<IHttpActionResult> PostUser(User item)
         {
+            //Original code
             User current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
-        }
+            //
+            
+
+         
+        
+
+    }
 
         // DELETE tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public Task DeleteUser(string id)

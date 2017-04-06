@@ -60,6 +60,10 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
+    <Reference Include="Microsoft.Azure.NotificationHubs, Version=2.16.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.NotificationHubs.1.0.7\lib\net45-full\Microsoft.Azure.NotificationHubs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
@@ -88,6 +92,7 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
@@ -141,6 +146,7 @@
     <Reference Include="System.Web.Http.Tracing">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.2.3\lib\net45\System.Web.Http.Tracing.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -152,6 +158,7 @@
     <Compile Include="Controllers\CommentAbusController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\FriendshipController.cs" />
+    <Compile Include="Controllers\FriendsPostsController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\PostImageController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
@@ -163,6 +170,7 @@
     <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\CommentAbus.cs" />
     <Compile Include="DataObjects\Friendship.cs" />
+    <Compile Include="DataObjects\Notify.cs" />
     <Compile Include="DataObjects\Post.cs" />
     <Compile Include="DataObjects\PostAbus.cs" />
     <Compile Include="DataObjects\PostImage.cs" />
@@ -174,7 +182,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

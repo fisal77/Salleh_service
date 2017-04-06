@@ -9,19 +9,17 @@ namespace sallemService.DataObjects
 
     public partial class Friendship : EntityData
     {
-        [Key]
-        [Column(Order = 0)]
-        public new Guid Id { get; set; }
+        
 
         [Key]
         [Column(Order = 1)]
-        public Guid FriendId { get; set; }
+        public string FriendId { get; set; }
 
         [Required]
         [StringLength(23)]
         public string FriendsSince { get; set; }
 
-        public byte StatusId { get; set; }
+        public int StatusId { get; set; }
 
         public virtual User User { get; set; }
 

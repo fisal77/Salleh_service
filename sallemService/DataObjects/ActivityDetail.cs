@@ -7,15 +7,19 @@ namespace sallemService.DataObjects
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class ActivityDetail: EntityData
+    public partial class ActivityDetail : EntityData
     {
-        public new Guid Id { get; set; }
+        
 
-        public Guid ActivityId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string ActivityId { get; set; }
 
-        public Guid ParticipantId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string ParticipantId { get; set; }
 
-        public byte ParticipationStatus { get; set; }
+        public int ParticipationStatus { get; set; }
 
         public virtual Activity Activity { get; set; }
 

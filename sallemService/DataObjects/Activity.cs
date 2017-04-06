@@ -16,9 +16,11 @@ namespace sallemService.DataObjects
             Posts = new HashSet<Post>();
         }
 
-        public new Guid Id { get; set; }
+       
 
-        public Guid OrganizerId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string OrganizerId { get; set; }
 
         [Required]
         public string Subject { get; set; }

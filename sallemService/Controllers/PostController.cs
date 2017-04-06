@@ -6,6 +6,7 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using sallemService.DataObjects;
 using sallemService.Models;
+using System;
 
 namespace sallemService.Controllers
 {
@@ -39,8 +40,9 @@ namespace sallemService.Controllers
         // POST tables/Post
         public async Task<IHttpActionResult> PostPost(Post item)
         {
+            
             Post current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+           return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/Post/48D68C86-6EA6-4C25-AA33-223FC9A27959

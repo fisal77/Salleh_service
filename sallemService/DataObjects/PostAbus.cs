@@ -10,11 +10,15 @@ namespace sallemService.DataObjects
     [Table("PostAbuses")]
     public partial class PostAbus : EntityData
     {
-        public new Guid Id { get; set; }
+        
 
-        public Guid PostId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string PostId { get; set; }
 
-        public Guid ReporterId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string ReporterId { get; set; }
 
         public int TypeId { get; set; }
 

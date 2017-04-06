@@ -23,7 +23,7 @@ namespace sallemService.Models
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
-       
+
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<ActivityDetail> ActivityDetails { get; set; }
         public virtual DbSet<CommentAbus> CommentAbuses { get; set; }
@@ -34,7 +34,7 @@ namespace sallemService.Models
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<UserLocation> UserLocations { get; set; }
         public virtual DbSet<User> Users { get; set; }
-       
+        public virtual DbSet<Notify> Notifies { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,8 +45,8 @@ namespace sallemService.Models
 
 
             modelBuilder.Entity<Activity>()
-                .Property(e => e.HeldOn)
-                .IsFixedLength();
+                 .Property(e => e.HeldOn)
+                 .IsFixedLength();
 
             modelBuilder.Entity<Activity>()
                 .Property(e => e.Longitude)
@@ -67,13 +67,19 @@ namespace sallemService.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Friendship>()
+                .Property(e => e.Id)
+                .HasColumnOrder(0);
+            modelBuilder.Entity<Friendship>()
+                .Property(e => e.FriendId)
+                .HasColumnOrder(1);
+            modelBuilder.Entity<Friendship>()
                 .Property(e => e.FriendsSince)
                 .IsFixedLength();
+            modelBuilder.Entity<Post>()
+               .HasMany(e => e.PostImages)
+               .WithRequired(e => e.Post)
+               .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PostImage>()
-                .HasMany(e => e.PostImages1)
-                .WithRequired(e => e.PostImage1)
-                .HasForeignKey(e => e.PostId);
 
             modelBuilder.Entity<Post>()
                 .HasMany(e => e.Comments)
@@ -151,9 +157,9 @@ namespace sallemService.Models
                 .HasMany(e => e.UserLocations)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
+
+
         }
-
-
     }
 }
 

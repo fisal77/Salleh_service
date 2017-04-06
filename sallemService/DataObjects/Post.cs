@@ -1,3 +1,4 @@
+
 namespace sallemService.DataObjects
 {
     using Microsoft.Azure.Mobile.Server;
@@ -14,9 +15,10 @@ namespace sallemService.DataObjects
         {
             Comments = new HashSet<Comment>();
             PostAbuses = new HashSet<PostAbus>();
+            PostImages = new HashSet<PostImage>();
         }
 
-        public new Guid Id { get; set; }
+        
 
         [Required]
         [StringLength(50)]
@@ -25,9 +27,15 @@ namespace sallemService.DataObjects
         [Required]
         public string Subject { get; set; }
 
-        public Guid UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
-        public Guid? ActivityId { get; set; }
+        [StringLength(128)]
+        public string ActivityId { get; set; }
+
+        [StringLength(128)]
+        public string ImagePath { get; set; }
 
         public virtual Activity Activity { get; set; }
 
@@ -36,6 +44,9 @@ namespace sallemService.DataObjects
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PostAbus> PostAbuses { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostImage> PostImages { get; set; }
 
         public virtual User User { get; set; }
     }

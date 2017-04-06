@@ -15,15 +15,19 @@ namespace sallemService.DataObjects
             CommentAbuses = new HashSet<CommentAbus>();
         }
 
-        public new Guid Id { get; set; }
+        
 
-        public Guid PostId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string PostId { get; set; }
 
         [Required]
         [StringLength(23)]
         public string CommentedAt { get; set; }
 
-        public Guid UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
         [Required]
         public string Subject { get; set; }

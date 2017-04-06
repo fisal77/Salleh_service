@@ -6,6 +6,7 @@ using System.Web.Http.OData;
 using Microsoft.Azure.Mobile.Server;
 using sallemService.DataObjects;
 using sallemService.Models;
+using System;
 
 namespace sallemService.Controllers
 {
@@ -39,6 +40,20 @@ namespace sallemService.Controllers
         // POST tables/Activity
         public async Task<IHttpActionResult> PostActivity(Activity item)
         {
+            //try
+            //{
+            //    sallemContext context = new sallemContext();
+            //    item.CreatedAt = DateTime.Now;
+            //    item.Version = new byte[] { 1 };
+            //    item.Deleted = false;
+            //    context.Activities.Add(item);
+            //    context.SaveChanges();
+            //}
+            //catch (System.Exception e)
+            //{
+            //    string s = e.Message;
+            //    throw;
+            //}
             Activity current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }

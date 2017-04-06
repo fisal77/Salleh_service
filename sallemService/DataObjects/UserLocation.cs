@@ -9,9 +9,11 @@ namespace sallemService.DataObjects
 
     public partial class UserLocation : EntityData
     {
-        public new Guid Id { get; set; }
+        
 
-        public Guid UserId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
 
         public decimal Longitude { get; set; }
 

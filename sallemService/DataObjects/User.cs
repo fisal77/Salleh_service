@@ -1,16 +1,14 @@
-﻿using Microsoft.Azure.Mobile.Server;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-
 namespace sallemService.DataObjects
 {
-    public class User :EntityData
-    {
+    using Microsoft.Azure.Mobile.Server;
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
+    public partial class User : EntityData
+    {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
@@ -25,7 +23,7 @@ namespace sallemService.DataObjects
             UserLocations = new HashSet<UserLocation>();
         }
 
-        public new Guid Id { get; set; }
+      
 
         [Required]
         [StringLength(50)]
@@ -42,15 +40,15 @@ namespace sallemService.DataObjects
         [Required]
         [StringLength(50)]
         public string Password { get; set; }
+
         [Required]
         [StringLength(23)]
         public string JoinedAt { get; set; }
 
-        
+        public int StatusId { get; set; }
+
         [Required]
         public string ImageTitle { get; set; }
-
-        public int StatusID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Activity> Activities { get; set; }
@@ -78,6 +76,5 @@ namespace sallemService.DataObjects
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserLocation> UserLocations { get; set; }
-
     }
 }

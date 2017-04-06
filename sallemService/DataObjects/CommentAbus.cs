@@ -10,11 +10,15 @@ namespace sallemService.DataObjects
     [Table("CommentAbuses")]
     public partial class CommentAbus : EntityData
     {
-        public new Guid Id { get; set; }
+        
 
-        public Guid CommentId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string CommentId { get; set; }
 
-        public Guid ReporterId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string ReporterId { get; set; }
 
         public int TypeId { get; set; }
 
