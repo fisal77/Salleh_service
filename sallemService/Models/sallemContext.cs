@@ -35,14 +35,16 @@ namespace sallemService.Models
         public virtual DbSet<UserLocation> UserLocations { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Notify> Notifies { get; set; }
-
+        public virtual DbSet<PostsView> PostsViews { get; set; }
+        public virtual DbSet<CommentsView> CommentsViews { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
 
-
+            modelBuilder.Configurations.Add(new PostsViewConfig());
+            modelBuilder.Configurations.Add(new CommentsViewConfig());
 
             modelBuilder.Entity<Activity>()
                  .Property(e => e.HeldOn)

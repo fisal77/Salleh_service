@@ -37,6 +37,8 @@ namespace sallemService.DataObjects
         [StringLength(128)]
         public string ImagePath { get; set; }
 
+        public string PostImage { get; set; }
+
         public virtual Activity Activity { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

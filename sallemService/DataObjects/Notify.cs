@@ -11,23 +11,24 @@ namespace sallemService.DataObjects
     {
         [Required]
         [StringLength(128)]
-        public String SourceUser { get; set; }
+        public string SourceUser { get; set; }
 
         [Required]
         [StringLength(128)]
-        public String DestUser { get; set; }
+        public string DestUser { get; set; }
 
         [Required]
         [StringLength(23)]
-        public String PublishedAt { get; set; }
+        public string PublishedAt { get; set; }
 
         [Required]
         [StringLength(20)]
-        public String Title { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        public String Subject { get; set; }
-                
+        public string Subject { get; set; }
+
+        [Required]        
         public bool Delivered { get; set; }
 
 

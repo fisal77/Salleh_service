@@ -38,7 +38,8 @@ namespace sallemService.Controllers
                 ).Select(x => x.FriendId).ToListAsync();
                 friends.Add(id);
                 var posts = await context.Posts.Where
-                    (x => friends.Contains(x.UserId)).ToListAsync();
+                    (x => friends.Contains(x.UserId)).OrderByDescending(x => x.PostedAt)
+                    .ToListAsync();
                 foreach (var item in posts)
                 {
 
@@ -49,6 +50,7 @@ namespace sallemService.Controllers
                     friendPost.UserId = item.UserId;
                     friendPost.ImagePath = item.ImagePath;
                     friendPost.ActivityId = item.ActivityId;
+                    friendPost.PostImage = item.PostImage;
                     friendsPosts.Add(friendPost);
                 }
                 return friendsPosts;
@@ -58,9 +60,12 @@ namespace sallemService.Controllers
                 string m = e.Message;
                 throw;
             }
-                  
+                 
 
         }
+        
+        
+
     }
 
 }
@@ -80,4 +85,15 @@ public class FriendPost
 
     
     public string ImagePath { get; set; }
+
+    public string PostImage { get; set; }
+
+}
+public class CustomPost
+{
+    public string Id { get; set; }
+    public string PostedAt { get; set; }
+
+
+    public string Subject { get; set; }
 }

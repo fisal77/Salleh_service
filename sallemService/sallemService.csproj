@@ -162,6 +162,7 @@
     <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\PostImageController.cs" />
+    <Compile Include="Controllers\PostsViewController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserLocationController.cs" />
@@ -170,14 +171,18 @@
     <Compile Include="DataObjects\ActivityDetail.cs" />
     <Compile Include="DataObjects\Comment.cs" />
     <Compile Include="DataObjects\CommentAbus.cs" />
+    <Compile Include="DataObjects\CommentsView.cs" />
     <Compile Include="DataObjects\Friendship.cs" />
     <Compile Include="DataObjects\Notify.cs" />
     <Compile Include="DataObjects\Post.cs" />
     <Compile Include="DataObjects\PostAbus.cs" />
     <Compile Include="DataObjects\PostImage.cs" />
+    <Compile Include="DataObjects\PostsView.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\UserLocation.cs" />
+    <Compile Include="Models\CommentsViewConfig.cs" />
+    <Compile Include="Models\PostsViewConfig.cs" />
     <Compile Include="Models\sallemContext.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,7 +202,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\PublishProfiles\sallem - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\sallemapp - Web Deploy.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
