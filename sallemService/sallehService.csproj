@@ -202,6 +202,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\salleh - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\salleh - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\sallemapp - Web Deploy.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

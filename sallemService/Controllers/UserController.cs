@@ -8,6 +8,7 @@ using sallemService.DataObjects;
 using sallemService.Models;
 using Microsoft.Azure.Mobile.Server.Config;
 using Microsoft.Azure.NotificationHubs;
+using System;
 
 namespace sallemService.Controllers
 {
@@ -37,6 +38,34 @@ namespace sallemService.Controllers
         public Task<User> PatchUser(string id, Delta<User> patch)
         {
              return UpdateAsync(id, patch);
+        }
+        protected override Task<User> UpdateAsync(string id, Delta<User> patch)
+        {
+            return LocalUpdate(id, patch);
+        }
+
+        private async Task<User> LocalUpdate(string id, Delta<User> patch)
+        {
+            try
+            {
+                User user = patch.GetEntity();
+                sallemContext context = new sallemContext();
+                var users = context.Users;
+                var userToUpdate = await users.FindAsync(id);
+                if(userToUpdate != null)
+                {
+                    userToUpdate.StatusId = user.StatusId;
+                    userToUpdate.ImageTitle = user.ImageTitle;
+                }
+                await context.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                String s = ex.Message;
+                throw;
+            }
+           
         }
 
         // POST tables/User

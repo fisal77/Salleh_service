@@ -39,30 +39,41 @@ namespace sallemService.Controllers
         protected override Task<Friendship> UpdateAsync(string id, Delta<Friendship> patch)
         {
             return LocalUpdate(id, patch);
-            
+
             //return base.UpdateAsync(id, patch);
         }
         private async Task<Friendship> LocalUpdate(string id, Delta<Friendship> patch)
         {
-            Friendship updatable = patch.GetEntity();
-            sallemContext context = new sallemContext();
-            var friends = context.Friendships;
-            var friendOne = friends.Where(x => x.Id == id && x.FriendId == updatable.FriendId).FirstOrDefault();
-            var friendTwo = friends.Where(x => x.Id == updatable.FriendId && x.FriendId == id).SingleOrDefault();
-            if (friendOne != null) //Update first part of friendship
+            try
             {
-                friendOne.StatusId = updatable.StatusId;
-                friendOne.UpdatedAt = DateTime.Now;
-
+                Friendship updatable = patch.GetEntity();
+                sallemContext context = new sallemContext();
+                var friends = context.Friendships;
+                var friendOne = friends.Where(x => x.Id == id && x.FriendId == updatable.FriendId).FirstOrDefault();
+                if (friendOne != null) //Update first part of friendship
+                {
+                    friendOne.StatusId = updatable.StatusId;
+                    friendOne.FriendsSince = updatable.FriendsSince;
+                    //Add the second the part after his react to the request
+                    Friendship secondPart = new Friendship();
+                    secondPart.Id = friendOne.FriendId;
+                    secondPart.FriendId = friendOne.Id;
+                    secondPart.FriendsSince = friendOne.FriendsSince;
+                    secondPart.StatusId = friendOne.StatusId;
+                    secondPart.CreatedAt = DateTime.Now;
+                    secondPart.Version = new byte[] { 1 };
+                    secondPart.Deleted = false;
+                    friends.Add(secondPart);
+                }
+                await context.SaveChangesAsync();
+                return patch.GetEntity();
 
             }
-            if(friendTwo != null) //Update second part of friendship
+            catch (Exception e)
             {
-                friendTwo.StatusId = updatable.StatusId;
-                friendTwo.UpdatedAt = DateTime.Now;
+                String s = e.Message;
+                throw;
             }
-            await context.SaveChangesAsync();
-            return friendOne;
         }
 
         // POST tables/Friendship

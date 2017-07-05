@@ -24,35 +24,47 @@ namespace sallemService.Controllers
         }
         private async Task<List<PostsView>> GetPostsViewSync(string id, string lastUpdate)
         {
+            //Declare result list.
             List<PostsView> friendsPosts = new List<PostsView>();
             try
             {
+
                 string i = id;
                 sallemContext context = new sallemContext();
-
+                //First get friends of current user id.
                 var friends = await context.Friendships.Where(x => x.Id == i
                  && x.StatusId == 2
                 ).Select(x => x.FriendId).ToListAsync();
+                //Add user himself.
                 friends.Add(id);
                 List<PostsView> posts = new List<PostsView>();
+                //In case need only refresh. Then load posts from last update date and onward.
                 if (lastUpdate != null && !string.IsNullOrEmpty(lastUpdate))
                 {
-                    posts = await context.PostsViews.Where
+                    //Find posts that has user id that is one of the id(s) contained in friends
+                    //list including the current user himself where postedat field is greater than last
+                    //update argument.
+                      posts = await context.PostsViews.Where
                         (x => friends.Contains(x.PosterId)
                           && string.Compare(x.PostedAt, lastUpdate) > 0
                         ).OrderByDescending(x => x.PostedAt)
                         .ToListAsync();
                 }
+                //Otherwise, get all posts.
                 else
                 {
-                    posts = await context.PostsViews.Where
+                    //Find posts that has user id that is one of the id(s) contained in friends list
+                     //including the current user himself.
+                       posts = await context.PostsViews.Where
                        (x => friends.Contains(x.PosterId))
                        .OrderByDescending(x => x.PostedAt)
                        .ToListAsync();
                 }
+                //Materialize the result.
                 foreach (var item in posts)
                 {
                     string tempPostId = item.PostId;
+                    //Find comments of this post.
                     var postComments = await context.CommentsViews.Where(
                         x => x.PostId == tempPostId
                         ).OrderByDescending(x => x.CommentDate).ToListAsync();
